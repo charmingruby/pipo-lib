@@ -18,18 +18,17 @@ type Server struct {
 
 // New constructs a new REST server.
 //
-// host: The host to listen on.
 // port: The port to listen on.
 //
 // Returns a new REST server and a Gin engine(http handler).
-func New(host, port string) (*Server, *gin.Engine) {
+func New(port string) (*Server, *gin.Engine) {
 	router := gin.Default()
 
 	gin.SetMode(gin.ReleaseMode)
 
 	router.GET("/debug/pprof/*any", gin.WrapH(http.DefaultServeMux))
 
-	addr := fmt.Sprintf("%s:%s", host, port)
+	addr := fmt.Sprintf(":%s", port)
 
 	return &Server{
 		server: http.Server{
