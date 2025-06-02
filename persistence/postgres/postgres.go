@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/charmingruby/pipo/lib/logger"
+	"github.com/charmingruby/pipo-lib/logger"
 	"github.com/jmoiron/sqlx"
 
 	// Postgres driver.

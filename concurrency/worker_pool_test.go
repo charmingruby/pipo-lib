@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/charmingruby/pipo/lib/concurrency"
+	"github.com/charmingruby/pipo-lib/concurrency"
 	"github.com/stretchr/testify/require"
 )
 
