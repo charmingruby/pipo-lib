@@ -205,9 +205,10 @@ func (wp *WorkerPool[T, R]) Close() error {
 	wp.closed = true
 	wp.mu.Unlock()
 
+	close(wp.inCh)
+
 	wp.wg.Wait()
 
-	close(wp.inCh)
 	close(wp.outCh)
 	close(wp.errCh)
 
