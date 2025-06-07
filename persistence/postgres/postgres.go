@@ -21,19 +21,9 @@ type Client struct {
 	logger *logger.Logger
 }
 
-// ConnectionInput represents the input for a Postgres connection.
-type ConnectionInput struct {
-	User         string
-	Password     string
-	Host         string
-	Port         string
-	DatabaseName string
-	SSL          string
-}
-
 // New constructs a new Postgres client.
 //
-// logger: The logger.
+// logger: The logger instance.
 // url: The connection URL. e.g. "postgresql://user:password@host:port/database?sslmode=disable"
 //
 // Returns a new Postgres client and an error if the connection fails.
