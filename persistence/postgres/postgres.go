@@ -3,8 +3,6 @@ package postgres
 
 import (
 	"context"
-	"fmt"
-	"net"
 
 	"github.com/charmingruby/pipo-lib/logger"
 	"github.com/jmoiron/sqlx"
@@ -12,6 +10,8 @@ import (
 	// Postgres driver.
 	_ "github.com/lib/pq"
 )
+
+const driver = "postgres"
 
 // Client represents a Postgres connection.
 type Client struct {
@@ -34,22 +34,11 @@ type ConnectionInput struct {
 // New constructs a new Postgres client.
 //
 // logger: The logger.
-// in: The connection input.
+// url: The connection URL. e.g. "postgresql://user:password@host:port/database?sslmode=disable"
 //
 // Returns a new Postgres client and an error if the connection fails.
-func New(logger *logger.Logger, in ConnectionInput) (*Client, error) {
-	connectionString := fmt.Sprintf(
-		"postgresql://%s:%s@%s/%s?sslmode=%s",
-		in.User,
-		in.Password,
-		net.JoinHostPort(in.Host, in.Port),
-		in.DatabaseName,
-		in.SSL,
-	)
-
-	dbDriver := "postgres"
-
-	db, err := sqlx.Connect(dbDriver, connectionString)
+func New(logger *logger.Logger, url string) (*Client, error) {
+	db, err := sqlx.Connect(driver, url)
 	if err != nil {
 		return nil, err
 	}
